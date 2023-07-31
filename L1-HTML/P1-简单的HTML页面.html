@@ -116,7 +116,7 @@
         <section id="toc2">
             <h2>2. 数据要求与预处理</h2>
             <p>
-                输入数据包括因变量Y和自变量数据X。自变量应为类型量；如果自变量为数值量，则需要进行离散化处理。离散可以基于专家知识，也可以直接等分或使用分类算法如K-means等。若数据为GIS数据，需要先将其转化为下图所示的Excel数据。小编以现有数据2017年城市蔓延度为因变量，选取自变量指标（部分）如下表，并将这8个指标进行自然断点法划分为5类。
+                输入数据包括因变量Y和自变量数据X。自变量应为类型量；如果自变量为数值量，则需要进行离散化处理。离散可以基于专家知识，也可以直接等分或使用分类算法如K-means等。若数据为GIS数据，需要先将其转化为下图所示的Excel数据。以现有数据2017年城市蔓延度为因变量，选取自变量指标（部分）如下表，并将这8个指标进行自然断点法划分为5类。
             </p>
             <table border="1" cellspacing="0" cellpadding="10">
                 <tr>
@@ -168,15 +168,15 @@
             <p>
                 &nbsp;&nbsp;&nbsp;&nbsp;<strong>步骤1. 下载软件并在 Excel 中输入数据</strong>
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;(1) 下载 Excel Geodetector 软件（在下面的 "软件和示例数据下载 "部分），单击下载三个示例中的任一个，解压下载的文件，您会发现一个 Excel 文件（这是带有示例数据集的 Geodetector 软件！），双击 Excel 文件，出现图 3 和图 5。图 3 是 Geodetector 的输入数据格式：每一行表示一个样本单位（如一个村庄）；第 1 列记录响应变量 Y；第 2 列及以后各列表示 Y 或因子 X 的分区，后者根据分层内的相似性进行分区。
+                &nbsp;&nbsp;&nbsp;&nbsp;(1) 下载 Excel Geodetector 软件（在下面的 "软件和示例数据下载 "部分），单击下载三个示例中的任一个，解压下载的文件，您会发现一个 Excel 文件（这是带有示例数据集的 Geodetector 软件！），双击 Excel 文件，出现<strong>Fig.4</strong> 和<strong>Fig.5</strong>。<strong>Fig.4</strong> 是 Geodetector 的输入数据格式：每一行表示一个样本单位（如一个村庄）；第 1 列记录响应变量 Y；第 2 列及以后各列表示 Y 或因子 X 的分区，后者根据分层内的相似性进行分区。
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;(2) 按图 3 的格式将数据输入 Excel Geodetector 软件。然后转到步骤 2。
+                &nbsp;&nbsp;&nbsp;&nbsp;(2) 按<strong>Fig.4</strong> 的格式将数据输入 Excel Geodetector 软件。然后转到步骤 2。
                 <pre></pre>
                 <img src="./image/P1-img/4.png" alt="" width="958.8" height="368.5">
                 <pre></pre>
                 &nbsp;&nbsp;&nbsp;&nbsp;（注：Y 应为数值变量；X 必须为分类变量，如土地利用类型、季节。如果 X 是数值变量，则应将其转换为分类变量，例如人均 GDP 分为 5 个分层。每个分层至少需要三个样本单位）。
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;(3) 如果您的数据是 GIS 格式，如图 4 所示，您可以直接使用第 4 节中的 QGIS，也可以将 GIS 数据转换为 Excel 数据，如图 3 所示。
+                &nbsp;&nbsp;&nbsp;&nbsp;(3) 如果您的数据是 GIS 格式，如<strong>Fig.4</strong> 所示，您可以直接使用第 4 节中的 QGIS，也可以将 GIS 数据转换为 Excel 数据，如<strong>Fig.4</strong> 所示。
                 <pre></pre>
                 <img src="./image/P1-img/5.png" alt="" width="987.6" height="485">
                 <pre></pre>
@@ -184,7 +184,7 @@
             <p>
                 &nbsp;&nbsp;&nbsp;&nbsp;<strong>步骤2. 运行上步下载的软件</strong>
                 <br>
-                &nbsp;&nbsp;&nbsp;&nbsp;软件只设计了一个操作界面（图 5）。读取数据 "按钮的功能是加载数据，因此点击该按钮后，"变量 "列表框中将列出所有变量。然后，在界面右侧相应的列表框 Y 和 X 中选择疾病和分区 Y 或环境因素变量。最后，点击 "运行 "按钮即可执行 Geodetector。
+                &nbsp;&nbsp;&nbsp;&nbsp;软件只设计了一个操作界面（<strong>Fig.5</strong>）。读取数据 "按钮的功能是加载数据，因此点击该按钮后，"变量 "列表框中将列出所有变量。然后，在界面右侧相应的列表框 Y 和 X 中选择疾病和分区 Y 或环境因素变量。最后，点击 "运行 "按钮即可执行 Geodetector。
                 <pre></pre>
                 <img src="./image/P1-img/6.png" alt="" width="935.3" height="656">
             </p>
@@ -195,23 +195,23 @@
         <section id="toc4">
             <h2>4. 输出结果判读</h2>
             <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;Geodetector 在四个 Excel 电子表格中输出风险检测器、因素检测器、生态检测器和交互检测器的结果（图 6）。
+                &nbsp;&nbsp;&nbsp;&nbsp;Geodetector 在四个 Excel 电子表格中输出风险检测器、因素检测器、生态检测器和交互检测器的结果（<strong>Fig.6</strong>）。
                 <pre></pre>
                 <img src="./image/P1-img/7.png" alt="" width="800" height="113">
                 <pre></pre>
-                &nbsp;&nbsp;&nbsp;&nbsp;在 "风险检测器"页面（图 7）中，每个环境风险因素的结果信息都显示在两个表格中。第一张表格给出了某一风险因素在每个分层中的平均疾病发病率，该风险因素的名称写在表格的左上方。第二张表格给出了两个分层之间平均疾病发病率在统计上的显著差异；如果存在显著差异，则相应的数值为 "Y"，否则为 "N"。
+                &nbsp;&nbsp;&nbsp;&nbsp;在 "风险检测器"页面（<strong>Fig.7</strong>）中，每个环境风险因素的结果信息都显示在两个表格中。第一张表格给出了某一风险因素在每个分层中的平均疾病发病率，该风险因素的名称写在表格的左上方。第二张表格给出了两个分层之间平均疾病发病率在统计上的显著差异；如果存在显著差异，则相应的数值为 "Y"，否则为 "N"。
                 <pre></pre>
                 <img src="./image/P1-img/8.png" alt="" width="990" height="241">
                 <pre></pre>
-                &nbsp;&nbsp;&nbsp;&nbsp;图 8 显示了 "因素检测器"表中给出的各环境风险因素 q 值的输出格式。表头给出了环境风险因子 X（X1、X2、......、Xn）的名称，而相关的 q 值及其对应的 p 值则显示在下面一行中。
+                &nbsp;&nbsp;&nbsp;&nbsp;<strong>Fig.8</strong> 显示了 "因素检测器"表中给出的各环境风险因素 q 值的输出格式。表头给出了环境风险因子 X（X1、X2、......、Xn）的名称，而相关的 q 值及其对应的 p 值则显示在下面一行中。
                 <pre></pre>
                 <img src="./image/P1-img/9.png" alt="" width="1000" height="130">
                 <pre></pre>
-                &nbsp;&nbsp;&nbsp;&nbsp;在 "生态检测器"表（图 9）中，显示了两个环境风险因素之间具有统计学意义的差异结果。如果 Y(X1)（行中的风险因素名称）明显大于 Y(X2)（列中的风险因素名称），则相关值为 "Y"，而 "N "则表示相反的含义。
+                &nbsp;&nbsp;&nbsp;&nbsp;在 "生态检测器"表（<strong>Fig.9</strong>）中，显示了两个环境风险因素之间具有统计学意义的差异结果。如果 Y(X1)（行中的风险因素名称）明显大于 Y(X2)（列中的风险因素名称），则相关值为 "Y"，而 "N "则表示相反的含义。
                 <pre></pre>
                 <img src="./image/P1-img/10.png" alt="" width="996.3" height="178">
                 <pre></pre>
-                &nbsp;&nbsp;&nbsp;&nbsp;交互检测器的结果格式如图 10 所示。表格下方的 "交互关系"表示两个因素之间的交互关系。该关系用坐标轴定义。它有 5 个区间，包括 “(-∞，min(q(x), q(y)))”,“(min(q(x), q(y)), max(q(x), q(y)))”, “(max(q(x), q(y)), q(x) + q(y))”,“q(x) + q(y)”,“( q(x) + q(y),+∞)”，交互关系由 q(xÇy) 在 5 个区间中的位置决定（见表 1）。
+                &nbsp;&nbsp;&nbsp;&nbsp;交互检测器的结果格式如<strong>Fig.10</strong> 所示。表格下方的 "交互关系"表示两个因素之间的交互关系。该关系用坐标轴定义。它有 5 个区间，包括 “(-∞，min(q(x), q(y)))”,“(min(q(x), q(y)), max(q(x), q(y)))”, “(max(q(x), q(y)), q(x) + q(y))”,“q(x) + q(y)”,“( q(x) + q(y),+∞)”，交互关系由 q(xÇy) 在 5 个区间中的位置决定（见<strong>Tab.1</strong>）。
                 <pre></pre>
                 <img src="./image/P1-img/11.png" alt="" width="1000" height="153.7">
                 <pre></pre>
