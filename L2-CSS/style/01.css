@@ -1,0 +1,50 @@
+/* 样式可以写在head->style中，控制整个页面的样式 */
+h1{
+    /* 设置元素背景颜色 */
+    background-color: rgb(55, 100, 244);
+    /* 设置元素宽高 */
+    width: 90%;
+    height: 50px;
+    /* 设置元素边框 */
+    border: 0px solid rgb(255, 255, 255);
+    /* 设置边框圆角 */
+    border-radius: 5px;
+    /* 设置文字居中 */
+    text-align: center;
+    /* 控制整个块居中 */
+    margin: auto;
+    /* 设置文字行高 */
+    line-height: 50px;
+    /* 设置文字大小 */
+    font-size: 20px;
+    /* 鼠标悬浮样式变化 */
+    cursor: pointer;
+}
+/* 伪类元素 */
+h1:hover{
+    /* 设置元素背景颜色 */
+    background-color: rgb(255, 218, 95);
+
+}
+
+html{
+    text-align: center;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    background-color: rgb(255, 232, 232);
+    border: 2px solid rgb(241, 0, 0);
+    color: rgb(201, 14, 14);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    /* 缓慢变色 */
+    transition: background-color 0.5s ease;
+}
+button:hover{
+    background-color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+    
+}
