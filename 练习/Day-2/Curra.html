@@ -49,6 +49,14 @@
             display: flex;
             line-height: 80px;
         }
+        .options span {
+            cursor: pointer;
+            /* 缓慢变色 */
+            transition: text-decoration 0.3s ease;
+        }
+        .options span:hover {
+            text-decoration: 3px #aee4aa underline;
+        }
         .wrapper1 .icon {
             width: 30px;
             height: 30px;
@@ -79,6 +87,12 @@
             color: black;
             margin-right: 0;
             margin-left: 0;
+            cursor: pointer;
+            /* 缓慢变色 */
+            transition: background-color 0.5s ease;
+        }
+        .wrapper1 #start:hover {
+            background-color: #f0e479;
         }
         /* 白色按钮样式 */
         .wrapper1 .button-w {
@@ -169,6 +183,12 @@
             background-color: #aee4aa;
             color: black;
             margin-left: 5px;
+            cursor: pointer;
+            /* 缓慢变色 */
+            transition: background-color 0.5s ease;
+        }
+        .wrapper2 #free:hover {
+            background-color: #f0e479;
         }
 
         /* 最下面容器的样式 */
