@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding:0;
+        }
+
+        .wrapper{
+            width: 100%;
+            height: 60px;
+            margin: auto;
+            background-color: rgb(130, 255, 138);
+            /* 伪类清除浮动 */
+            overflow: hidden;
+            position: sticky;
+            top: 0; 
+        }
+
+        .menu-item{
+            width: 100px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            float: left;
+            cursor: pointer;
+            background-color: rgb(130, 255, 138);
+            color: rgb(255, 255, 255);
+        }
+
+        .menu-item:hover{
+            background-color: rgb(3, 190, 0);
+        }
+
+        .block{
+            width: 100%;
+            height: 1000px;
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="menu-item">手机</div>
+        <div class="menu-item">平板</div>
+        <div class="menu-item">电脑</div>
+    </div>
+
+    <div class="block"></div>
+</body>
+</html>

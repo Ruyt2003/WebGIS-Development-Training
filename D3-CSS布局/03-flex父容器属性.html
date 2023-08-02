@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-box{
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            margin: auto;
+            display: flex;
+            /* flex-direction控制主轴方向 */
+            /* row从左往右 column从上到下  row-reverse从右往左 column-reverse 从下往上*/
+            flex-direction: row;
+            /* flex-wrap控制flex-item是否可以换行,默认是nowrap不换行 nowrap wrap wrap-reverse */
+            flex-wrap: wrap;
+            /* justify-content定义主轴上的排列方式 默认flex-start从前往后 
+            flex-end从后往前 
+            center居中排列 
+            space-between两边顶格，中间均匀排布
+            space-around 均匀排布
+            */
+            justify-content: space-around;
+            /* align-items 定义元素，在侧轴上的排列方式 
+                flex-start
+                center在侧轴居中
+                flex-end在侧轴从后往前
+            */
+            align-items: center;
+        }
+
+        .flex-item{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(255, 0, 0);
+            margin: 0 10px;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-box">
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+    </div>
+</body>
+</html>

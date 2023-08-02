@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .flex-wrapper {
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            margin: auto;
+            display: flex;
+        }
+        .flex-item {
+            /* width: 40px; */
+            width: 200px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(255, 0, 0);
+            margin: 0 10px;
+            text-align: center;
+            line-height: 40px;
+            color: white;
+        }
+
+        .dot:nth-child(1) {
+            flex-shrink: 2;
+        }
+
+        .dot:nth-child(2) {
+            /* flex-grow: 1; */
+            flex-shrink: 1;
+        }
+
+        .dot:nth-child(3) {
+            /* flex-grow: 1; */
+            flex-shrink: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- order控制子元素的排列顺序 -->
+    <!-- <div class="flex-wrapper">
+        <div class="flex-item order1">1</div>
+        <div class="flex-item order1">2</div>
+        <div class="flex-item order1">3</div>
+    </div> -->
+
+    <!-- flex-grow控制元素如何长胖 -->
+    <!-- <div class="flex-wrapper">
+        <div class="flex-item dot">1</div>
+        <div class="flex-item dot">2</div>
+        <div class="flex-item dot">3</div>
+    </div> -->
+
+    <!-- flex-shrink控制元素如何瘦身 -->
+    <div class="flex-wrapper">
+        <div class="flex-item dot">1</div>
+        <div class="flex-item dot">2</div>
+        <div class="flex-item dot">3</div> 
+    </div>
+
+    <!-- flex 同时控制flex-grow flex-shrink flex-basis -->
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">flex用法</a>
+
+    <!-- align-self控制自身主轴排列方式，详见骰子示例 -->
+</body>
+</html>

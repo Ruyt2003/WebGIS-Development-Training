@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		/* 背景图相关属性 */
+		.banner {
+			width: 263px;
+			height: 378px;
+			/* 基本背景图 */
+			background-image: url(./images/banner-lady.png);
+			display: inline-block;
+		}
+
+		.repeat-banner {
+			display: inline-block;
+			width: 263px;
+			height: 378px;
+			/* 重复背景图 */
+			background-image: url(./images/icon/star.png);
+			/* 设置图片是否重复 */
+			background-repeat: repeat-x;
+			/* 设置图片是否铺满页面 cover代表铺满 contain代表保留原尺寸 */
+			background-size: contain;
+			/* 设置图片的位置*/
+			background-position: center;
+		}
+
+		/* 文本相关属性 */
+		/* font相关 */
+        span.font {
+            /* 文本大小 */
+            font-size: 18px;  /* 浏览器默认文本大小为16px，最小为12px */
+            /* 文本样式 */
+            font-family: 'Times New Roman', Times, serif;
+            /* 文本粗细 */
+            font-weight: 400;  /* normal: 400px; bold: 700px */
+            /* 文本风格 */
+            font-style: italic;
+        }
+
+        /* 文本外观 */
+		/* 文本颜色 */
+		div.outlook p#color {
+			color: #5f7ce8;
+		}
+		/* 文本对齐 */
+		div.outlook p#align {
+			text-align: center;
+		}
+		/* 文本行高 */
+		div.outlook p#height {
+			line-height: 80px;
+		}
+		/* 装饰线 */
+		div.outlook p#under {
+			text-decoration: underline;
+			/*text-decoration: none 可以取消元素自带的装饰线*/
+		}
+		div.outlook p#through {
+			text-decoration: red line-through;
+		}
+		/* 文字阴影 */
+		div.outlook p#shadoe {
+			text-shadow: 2px 2px #ffef3b
+		}
+		
+	</style>
+</head>
+<body>
+	<!-- 背景图 -->
+	<div class="banner"></div>
+	<div class="repeat-banner"></div>
+
+	<pre> </pre>
+
+	<!-- 文本 -->
+	<h3>font相关</h3>
+    <span class="font">
+        Lorem ipsum dolor sit, amet consectetur
+        <!-- font有继承性，所有在指定元素内的元素也会被font影响 -->
+    </span> 
+    <span>another span</span> <br>
+
+    <h3>文本外观</h3>
+    <div class="outlook">
+        <p id="color">文本颜色</p>
+        <p id="align">文本对齐</p>
+        <p id="height">文本行高</p>
+        <p id="under">下划线</p>
+        <p id="through">穿过文本</p>
+		<p id="shadoe">文字阴影</p>
+    </div>
+</body>
+</html>

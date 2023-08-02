@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 400px;
+            height: 400px;
+            background-color: black;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* 四个盒子的样式 */
+        .flex-box1 {
+            width: 125px;
+            height: 125px;
+            background-color: #e7e7e7;
+            border-radius: 10px;
+            margin: 50px 20px 20px 50px;
+            display: flex;
+        }
+        .flex-box2 {
+            width: 125px;
+            height: 125px;
+            background-color: #e7e7e7;
+            border-radius: 10px;
+            margin: 50px 50px 20px 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .flex-box3 {
+            width: 125px;
+            height: 125px;
+            background-color: #e7e7e7;
+            border-radius: 10px;
+            margin: 20px 20px 50px 50px;
+            display: flex;
+        }
+        .flex-box4 {
+            width: 125px;
+            height: 125px;
+            background-color: #e7e7e7;
+            border-radius: 10px;
+            margin: 20px 50px 50px 20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        /* 盒子里点的样式 */
+        .point1 {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: auto;
+        }
+        /* 逐点分别控制 */
+        .point2_1 {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 10px;
+            align-self: flex-start;
+        }
+        .point2_2 {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 10px;
+            align-self: flex-end;
+        }
+        .point3_1 {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 5px;
+            align-self: flex-start;
+        }
+        .point3_2 {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 5px;
+            align-self: center;
+        }
+        .point3_3 {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 5px;
+            align-self: flex-end;
+        }
+        /* 同类点合并控制 */
+        .point4_up {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 10px;
+            align-self: flex-start;
+        }
+        .point4_down {
+            width: 30px;
+            height: 30px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 10px;
+            align-self: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flex-box1">
+            <div class="point1"></div>
+        </div>
+
+        <div class="flex-box2">
+            <div class="point2_1"></div>
+            <div class="point2_2"></div>
+        </div>
+
+        <div class="flex-box3">
+            <div class="point3_1"></div>
+            <div class="point3_2"></div>
+            <div class="point3_3"></div>
+        </div>
+
+        <div class="flex-box4">
+            <div class="point4_up"></div>
+            <div class="point4_up"></div>
+            <div class="point4_down"></div>
+            <div class="point4_down"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+            width: 300px;
+            height: 300px;
+            /* text-align: center;
+            line-height: 300px; */
+            background-color: rgb(214, 255, 240);
+            margin: auto;
+            display: grid;
+            /* 分割出行和列 */
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            /* 指定网格区域模板 */
+            grid-template-areas: 
+                "part1 part1 part2"
+                "part1 part1 part2"
+                "part3 part4 part5";
+        }
+
+        /* 指定div所属区域 */
+        .part:first-child {
+            grid-area: part1;
+        }
+        .part:nth-child(2) {
+            grid-area: part2;
+        }
+        .part:nth-child(3) {
+            grid-area: part3;
+        }
+        .part:nth-child(4) {
+            grid-area: part4;
+        }
+        .part:nth-child(5) {
+            grid-area: part5;
+        }
+
+        .part{
+            border: 1px solid rgb(0, 60, 241);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="part">1</div>
+        <div class="part">2</div>
+        <div class="part">3</div>
+        <div class="part">4</div>
+        <div class="part">5</div>
+    </div>
+</body>
+</html>

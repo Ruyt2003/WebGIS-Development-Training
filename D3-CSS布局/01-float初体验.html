@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .float-item-left {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: red;
+            text-align: center;
+            line-height: 100px;
+            /* 向左浮动 */
+            float: left;
+        }
+
+        .float-item-right {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: rgb(255, 230, 0);
+            text-align: center;
+            line-height: 100px;
+            /* 向右浮动 */
+            float: right;
+        }
+
+        .father {
+            border: 3px solid black;
+            /* 推荐的清除浮动的方法 */
+            overflow: hidden;
+        }
+
+        /* 伪类清除浮动 */
+        /* .father::after {  */
+            /* 伪类的内容 */
+            /* content: ""; */
+            /* 变成块级元素 */
+            /* display: block;
+            clear: both;
+        } */
+
+        .san {
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+
+        .block {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(202, 255, 213);
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="float-item-left">左浮动</div>
+    <div class="float-item-right">右浮动</div> -->
+
+    <!-- 浮动导致高度坍塌问题 -->
+    <div class="father">
+        <div class="san">
+            <div class="block"></div>
+        </div>
+    </div>
+</body>
+</html>
