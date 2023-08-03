@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            position: relative;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #f9000c;
+        }
+        /*
+            1.相对定位relative，相对于元素之前的位置进行定位
+            2.相对定位的元素，不会脱离文档流（即保留元素之前的位置）
+        */
+        .box-relative {
+            background-color: #5f7ce8;
+            position: relative;
+            left: 100px;
+            top: 100px;
+        }
+
+        /*
+            1.绝对定位absolute，相对于父元素进行定位
+            2.绝对定位的元素，会脱离文档流（即不会保留元素之前的位置）
+        */
+        .box-absolute {
+            background-color: #e8b15f;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+
+        /* 子绝父相 */
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: #d5e2ff;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box box-relative">
+        <div class="son"></div>
+    </div>
+    <div class="box box-absolute">
+        <div class="son"></div>
+    </div>
+    <div class="box"></div>
+</body>
+</html>

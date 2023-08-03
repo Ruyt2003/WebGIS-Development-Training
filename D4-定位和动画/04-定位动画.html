@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #demo {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            position: relative;
+            left: 0;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="demo"></div>
+    <script>
+        // 定义一个变量n,初始值为1
+        var n = 1;
+
+        // 使用setInterval设置一个定时器,每隔1000/30毫秒(约33毫秒)执行一次
+        var id = setInterval(() => {
+
+            // 在console中打印n的值
+            console.log(n);
+
+            // 如果n<=100,将demo元素的left样式设置为n/100*300px
+            // 同时n自增1
+            if (n <= 100) {
+                demo.style.left = n / 100 * 300 + 'px';
+                n = n + 1;
+
+                // 如果n>100,则清除定时器
+            } else {
+                clearInterval(id);
+            }
+
+        }, 1000 / 30);
+    </script>
+</body>
+</html>

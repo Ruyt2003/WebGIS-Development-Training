@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 外面是太极容器 */
+        .taiji {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgb(255, 255, 255);
+            background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 100%);
+            border: 1px solid black;
+            position: relative;
+            top: 200px;
+            left: 50%;
+            margin-left: -150px;
+            animation: rotate 5s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .taiji::after {
+            content: '';
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -75px;
+            background: rgb(255, 255, 255);
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 253, 253, 1) 15%, rgba(0, 0, 0, 1) 17%, rgba(0, 0, 0, 1) 100%);
+        }
+
+        .taiji::before {
+            content: "";
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            margin-left: -75px;
+            background: rgb(0, 0, 0);
+            background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 15%, rgba(255, 253, 253, 1) 17%, rgba(255, 255, 255, 1) 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="taiji"></div>
+</body>
+</html>

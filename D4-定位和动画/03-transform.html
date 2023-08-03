@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #f9000c;
+            position: absolute;
+            left: 300px;
+            top: 300px;
+
+            /* 多个transform共存会覆盖而不会合并 */
+
+            /* translate可以改变元素位置 */
+            /* transform: translate(-100px, -100px); */
+
+            /* scale可以改变元素大小 */
+            /* transform: scale(0.5, 0.5); */
+            /* 连写可以避免覆盖 */
+            /* transform: translate(-100px, -100px) scale(0.5); */
+
+            /* rotate可以改变元素旋转角度 */
+            transform: rotate(45deg);
+        }
+
+        .box p {
+            font-size: 55px;
+            font-family: "Microsoft YaHei UI";
+            color: #fff;
+            text-align: center;
+            line-height: 200px;
+            transform: rotate(-45deg);
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p>OMEN</p>
+    </div>
+</body>
+</html>

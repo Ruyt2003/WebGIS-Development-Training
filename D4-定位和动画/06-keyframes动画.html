@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: #ff0000;
+            position: absolute;
+            left: 300px;
+            top:100px;
+            transform: translateX(300px);
+            animation: trans-break 5s linear ;
+        }
+
+        /* @keyframes trans-break { */
+        /*     !* 初始状态 *! */
+        /*     from { */
+        /*         transform: translateX(0%); */
+        /*     } */
+        /*      */
+        /*     !* 结束状态 *! */
+        /*     to { */
+        /*         transform: translateX(500px); */
+        /*     } */
+        /* } */
+
+        /* 百分比控制分段动画 */
+        @keyframes trans-break {
+            0% {
+                transform: translateX(300px);
+            }
+            25% {
+                transform: translateX(250px);
+            }
+            50% {
+                transform: translateX(300px);
+            }
+            75% {
+                transform: translateX(350px);
+            }
+            100% {
+                transform: translateX(300px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+</body>
+</html>

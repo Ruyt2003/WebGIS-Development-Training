@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .big-box {
+            width: 200px;
+            height: 200px;
+            background-color: #efffe5;
+            position: relative;
+        }
+
+        .small-box {
+            width: 100px;
+            height: 100px;
+            background-color: #5fe8d8;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            /* translate可以改变元素位置 */
+            /* 50%代表相对元素本身的位置 */
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="big-box">
+        <div class="small-box"></div>
+    </div>
+
+</body>
+</html>
