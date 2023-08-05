@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 定义一个变量，用来存储用户输入的数字
+        let num = prompt('请输入一个数字')
+
+        // 定义一个变量，用来存储是否是质数
+        let isPrime = true
+
+        // 判断是否是质数
+        // 从2开始，到num-1结束，每次加1
+        for (let i = 2; i < num; i++) {
+
+            // 判断是否能被整除
+            if (num % i == 0) {
+
+                // 如果能被整除，就不是质数
+                isPrime = false
+
+                // 跳出循环
+                break
+            }
+        }
+
+        // 判断是否是质数
+        if (isPrime) {
+
+            alert(num + '是质数')
+
+        } else {
+
+            alert(num + '不是质数')
+        }
+    </script>
+</body>
+</html>

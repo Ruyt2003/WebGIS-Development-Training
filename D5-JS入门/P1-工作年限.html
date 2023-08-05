@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let year = prompt('请输入你的工作年限')
+        let holiday = 0
+        if (year>0 && year<1) {
+            holiday = 5
+        } 
+        else if (year>=1 && year<3) {
+            holiday = 7
+        } 
+        else if (year>=3 && year<10) {
+            holiday = 15
+        } 
+        else if (year>=10) {
+            holiday = 30
+        }
+        alert('你的年假为'+holiday+'天')
+        
+        
+    </script>
+</body>
+</html>

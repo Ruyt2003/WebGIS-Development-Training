@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 顺序
+        //顺序结构是程序中最简单、最基本的流程控制，它没有特定的语法结构，程序会按照代码的先后顺序依次执行
+
+
+        // 条件
+        //根据不同的条件，执行不同的路径代码(执行代码多选一的过程) 从而得到不同的结果
+        /*
+        // if语句
+        // 条件成立  执行 if 里面代码，否则执行else 里面的代码
+        if(条件表达式) {
+            // [如果] 条件成立执行的代码
+        } else {
+            // [否则] 执行的代码
+        }
+        */
+        // 示例
+        let age = 18
+        if(age >= 18) {
+            console.log('成年人') 
+        } else {
+            console.log('未成年人')
+        }
+        
+        /*
+        // switch语句：多分支语句，它用于基于不同的条件来执行不同的代码
+        switch(表达式){ 
+            case value1:
+                // 表达式 等于 value1 时要执行的代码
+                break;
+            default:
+                // 表达式 不等于任何一个 value 时要执行的代码
+        }
+        */
+        // 示例
+        let day = 1
+        switch(day) {
+            case 1:
+                console.log('星期一')
+                break
+            case 2:
+                console.log('星期二')
+                break
+            case 3:
+                console.log('星期三')
+                break
+            case 4:
+                console.log('星期四')
+                break
+            case 5:
+                console.log('星期五')
+                break
+            case 6:
+                console.log('星期六')
+                break
+            case 7:
+                console.log('星期日')
+                break
+            default:
+                console.log('输入错误')
+                break
+        }
+
+        
+        // 循环
+        //重复多次执行有规律的代码, 可以使用循环来表示, 通过一个变量可以记录第几次循环, 已经循环的总次数
+        /*
+        // for循环
+        for(初始化变量; 条件表达式; 操作表达式 ){
+            // 循环体
+        }
+        */
+        // 示例
+        let sum = 0
+        for(let i=1; i<=100; i++) {
+        sum += i
+        }
+        console.log(sum)
+
+        /*
+        // do-while循环
+        do {
+            // 循环体代码 - 条件表达式为 true 时重复执行循环体代码
+        } while(条件表达式)
+        */
+        // 示例
+        let sum_2 = 0
+        let i = 1
+        do {
+            sum_2 += i
+            i++
+        } while(i<=100)
+        console.log(sum_2)
+
+        // 跳出循环：continue-跳出当前循环；break-跳出整个循环
+        // continue示例
+        for (let i = 1; i <= 5; i++) {
+            if (i == 3) {
+                console.log('这个包子不好吃，扔掉');
+                continue; // 跳出本次循环，跳出的是第3次循环 
+            }
+            console.log('我正在吃第' + i + '个包子呢'); // i = 1 2 4 5
+        }
+        // break示例
+        for (let i = 1; i <= 5; i++) {
+            if (i == 3) {
+                console.log('吃饱了，再也吃不下了');
+                break; // 直接退出整个for 循环，跳到整个for下面的语句
+            }
+            console.log('我正在吃第' + i + '个包子呢'); // i = 1 2
+        }
+    </script>
+</body>
+</html>
