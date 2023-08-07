@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 每个函数都会创建一个作用域 -->
+    <script>
+        /*
+        function fn(){
+            // 在作用域内声明的，称为局部变量
+            let a=1;
+        }
+        fn();
+        console.log(a); // a is not defined
+        */
+
+        // 全局变量 只有window是全局变量
+
+        /*
+        // 看执行结果时只看函数调用
+        const fn2 = () => {
+            let a=1;
+            const fn3 = () => {
+                let a=2;
+                console.log(a); // 2
+            }
+            console.log(a); // 1
+            a=3;
+            fn3();
+        }
+        fn2();
+        */
+
+        const fn1 = () => {
+            let a=1;
+            const fn2 = () => {
+                let a=2;
+                const fn3 = () => {
+                    console.log(a); // 3
+                }
+                a=22;
+                fn3();
+            }
+            console.log(a); // 1
+            a=100;
+            fn2();
+        }
+        fn1();
+
+    </script>
+</body>
+</html>

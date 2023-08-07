@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <ul id="list"></ul>
+    <script>
+        // 1.获取input中输入的文本数据
+        const input = document.getElementById('input');
+        const list = document.getElementById('list');
+        const todos = [];
+        // 2.监听input的键盘事件
+        input.onkeydown=(event)=>{
+            // 3.判断是否按下回车键
+            if(event.key === 'Enter'){
+                console.log(event);
+                console.log(event.target.value);
+                if (todos.includes(event.target.value)){
+                    alert('已经存在');
+                }
+                else {
+                    todos.push(event.target.value);
+                    // 创建一个li标签
+                    const li= document.createElement('li');
+                    // 设置li标签的内容
+                    li.innerHTML = event.target.value;
+                    // 将li标签添加到ul中
+                    list.appendChild(li);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

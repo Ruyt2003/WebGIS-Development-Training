@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        // 常规函数
+        let egg = '鸡蛋';
+        // Params 入参
+        function 微波炉(egg) {
+            console.log("加热"); // 加热
+            // Return 返回值
+            return egg + '煮熟了';
+        }
+        // 调用函数，得到热鸡蛋
+        const result = 微波炉(egg);
+        console.log(result); // 鸡蛋煮熟了
+
+
+        // 箭头函数
+        // 相加的函数
+        const add=(a,b)=>{
+            let sum=a+b
+            return sum
+        }
+        // 返回值简写 =>代表了返回
+        const add2=(a,b)=>a+b
+        // 复杂写法
+        const add3=(a,b)=>{
+            return {
+                a,
+                b
+            }
+        }
+        // 简单写法，用圆括号包裹对象，可以直接返回
+        const add4=(a,b)=>({a,b})
+    </script>
+</body>
+</html>

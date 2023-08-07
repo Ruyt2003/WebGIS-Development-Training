@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+
+        // 数组的创建
+        // 1.字面量创建
+        let arr1 = [1,2,3];
+        console.log(arr1); // [1, 2, 3]
+        // 2.构造函数创建
+        let arr2 = new Array(1,2,3);
+        console.log(arr2); // [1, 2, 3]
+        // 3.通过Array.of()方法创建
+        let arr3 = Array.of(1,2,3);
+        console.log(arr3); // [1, 2, 3]
+
+
+        // 字符串--->数组
+        let str = 'hello world';
+        // 1.split() 方法用于把一个字符串分割成字符串数组
+        let strArr = str.split(' ');
+        console.log(strArr); // ["hello", "world"]
+        // 2.Array.from() 方法默认把每一个字符都分割出来
+        let strArr2 = Array.from(str);
+        console.log(strArr2); // ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+
+        // 对象--->数组
+        let obj = {
+            name: 'jack',
+            age: 18
+        }
+        // 1.Object.keys() 方法会返回一个由一个给定对象的自身可枚举属性组成的数组
+        let objArr = Object.keys(obj);
+        console.log(objArr); // ["name", "age"]
+        // 2.Object.values() 方法返回一个给定对象自身的所有可枚举属性值的数组
+        let objArr2 = Object.values(obj);
+        console.log(objArr2); // ["jack", 18]
+        // 3.Array.from() 方法也可以把对象转换成数组
+        let obj2 = {
+            0: 'a',
+            1: 'b',
+            2: 'c',
+            length: 3
+        }
+        let objArr3 = Array.from(obj2);
+        console.log(objArr3); // ["a", "b", "c"]
+
+        // 数组--->数组 数组的截取和拼接
+        let arr = [1,2,3,4,5,6,7,8,9];
+        // slice() 方法可从已有的数组中返回选定的元素，即截取数组
+        let sliceArr = arr.slice(2,5);
+        console.log(sliceArr); // [3, 4, 5]
+        // concat() 方法用于连接两个或多个数组，即拼接数组
+        let shortArr1 = [1,2,3];
+        let shortArr2 = [4,5,6];
+        let longArr = shortArr1.concat(shortArr2);
+        console.log(longArr); // [1, 2, 3, 4, 5, 6]
+        // 三点运算符可以将数组展开，相当于把数组中的每一项都取出来，再放到一个新的数组中
+        let longArr2 = [...shortArr1,...shortArr2];
+        console.log(longArr2); // [1, 2, 3, 4, 5, 6]
+
+    </script>
+
+</body>
+</html>

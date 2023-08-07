@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- function与箭头函数的区别 -->
+    <script>
+        var fn = 2;
+        function fn(){
+            let a=1;
+        }
+        console.log(fn); // 2
+
+        const fn2 = () => {
+            console.log(this);
+        }
+    </script>
+</body>
+</html>

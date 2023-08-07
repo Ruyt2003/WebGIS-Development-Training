@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // arguments 获取函数调用时，传入的实参伪数组
+            function fn() {
+                console.log(arguments);
+            }
+            // 不传参数,打印一个Arguments对象，length为0
+            fn();
+            // 传入三个参数，打印一个Arguments对象，length为3
+            fn(1, 2, 3);
+
+            // 使用场景 不知道函数应该传几个参数的时候
+            function add() {
+                let sum = 0;
+                for (let i = 0; i < arguments.length; i++) {
+                    sum += arguments[i];
+                }
+                return sum;
+            }
+            const sum = add(1, 2, 3);
+            console.log(sum);
+
+            // this
+            function fn2() {
+                console.log(arguments);
+                console.log(this);
+                console.log(this.a);
+            }
+
+            fn2.a = 1;
+
+            function fn3() {
+                console.log('aaa');
+            }
+            // 使用()来调用函数实际上是一个简写
+            // fn2()
+            // 下面的才是完整写法 call函数的第一个参数,代表this指向默认指向window 后面就是函数的实参也就是arguments
+            // fn2.call(window,1,2,3)
+            // 我们可以通过改变call的第一个参数，来改变this指向
+            fn2.call(fn2, 1, 2, 3);
+
+            // 为什么要有this
+            let objs = {
+                name: '钱多多',
+                age: 15,
+                sayHi() {
+                    console.log(`hello i am${this.name}`);
+                },
+                sayHi2() {
+                    console.log(`hi i am${this.name}`);
+                },
+                sayHi3() {
+                    console.log(`n i am${this.name}`);
+                },
+                sayHi4() {
+                    console.log(`how do you do, i am${this.name}`);
+                },
+            };
+            objs.sayHi();
+            // 等效于下面的代码
+            objs.sayHi.call(objs);
+            // this可以指代对象，当对象名称发生变化的时候，可以不用去修改下面的函数代码
+
+            // 箭头函数的this永远都是window
+            const arrowFn = () => {
+                console.log(this);
+            };
+
+            arrowFn();
+            arrowFn.call(objs);
+        </script>
+    </body>
+</html>

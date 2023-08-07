@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <script>
+        let arr = [1,2,3];
+        console.log(arr);
+
+        // 伪数组 原型与真数组迥异——可以用于分辨伪数组
+        // 即伪数组没有数组中的很多方法，在使用时需小心
+        const divList = document.querySelectorAll('div');
+        console.log(divList);
+
+        // arguments是很典型的伪数组
+        function fn(){
+            console.log(arguments);
+        }
+        fn(1,2,3);
+    </script>
+</body>
+</html>
