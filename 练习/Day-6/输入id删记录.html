@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input">
+    <ul id="list"></ul>
+
+    <script>
+        const array = [
+            {
+                name: '张三', id: 1001
+            }, {
+                name: '李四', id: 1002
+            }, {
+                name: '王五', id: 1003
+            }, {
+                name: '狗蛋', id: 1004
+            }
+        ]
+        
+        // 获取到list对象
+        const list = document.getElementById('list');
+        // 获取到input对象
+        const input = document.getElementById('input');
+
+
+        // 删除list下面的所有元素
+        const remove = () => {
+            const lis = document.querySelectorAll('li');
+            if (lis.length > 0) {
+                for (let i = 0; i < lis.length; i++) {
+                    list.removeChild(lis[i]);   
+                }
+            }
+        }
+  
+        // 渲染list下面的所有li标签
+        const render = (array) => {
+            remove();
+            // 遍历数组
+            for (let i = 0; i < array.length; i++) {
+                const item = array[i];
+                console.log(item);
+                // 创建li标签
+                const li = document.createElement('li');
+                // 设置li标签的内容
+                li.innerHTML = item.name;
+                // 将li标签添加到ul中
+                list.appendChild(li);
+            }
+        }
+        // 在启动时即渲染数组
+        render(array);
+        
+
+        // 监听input的键盘事件
+        input.onkeydown=(event)=>{
+            if(event.key === 'Enter'){
+                console.log(event.target.value);
+                // 判断输入的id是否存在
+                const res = array.some((item)=>{
+                    return item.id == event.target.value;
+                })
+                console.log(res);
+                
+                if (res) {
+                    // 删除数组中的元素
+                    for (let i = 0; i < array.length; i++) {
+                        const item = array[i];
+                        if (item.id == event.target.value) {
+                            array.splice(i,1);
+                        }
+                    }
+                    // 重新渲染
+                    render(array);
+                }
+                else {
+                    alert('id不存在');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
