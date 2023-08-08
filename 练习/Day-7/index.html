@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.css">
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"> </script>
+        <link rel="stylesheet" href="./index.css">
+    </head>
+    <body>
+        <!-- 导航栏 -->
+        <div class="wrapper">
+            <div class="header">
+                <div class="logo"></div>
+                <div class="searchWrapper">
+                    <div class="icon"></div>
+                    <input type="text" id="searchInput">
+                </div>
+            </div>
+        </div>
+
+        <!-- 轮播图 -->
+        <div class="swiper">
+            <div class="swiper-wrapper"></div>
+            <!-- 分页器 -->
+            <div class="swiper-pagination"></div>
+            <!-- 导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+
+        <!-- 歌单 -->
+        <div class="content"></div>
+
+        <script>
+            // 歌单高度随页面大小的改变动态变化
+            window.addEventListener('resize', function() {
+                var windowHeight = window.innerHeight;
+                let contentHeight = windowHeight - 370;
+                var contentElement = document.querySelector('.content');
+                contentElement.style.height = contentHeight + 'px';
+            });
+
+            // 从服务端拿数据渲染页面
+            window.onload = async () => {
+                const baseUrl = `http://1.15.88.222:3000`;
+                // 拿到轮播图中的数据
+                const res = await axios.get(`${baseUrl}/banner`);
+                console.log(res.data);
+                // 解构赋值
+                const { banners } = res.data;
+                // 拿到轮播图的容器
+                const wrapper = document.querySelector('.swiper-wrapper');
+                // 遍历轮播图中的数据 生成轮播图
+                banners.forEach(({ imageUrl }) => {
+                    const newSwiperItem = document.createElement('div');
+                    newSwiperItem.className = 'swiper-slide';
+                    newSwiperItem.style.background = `url(${imageUrl}) no-repeat`;
+                    newSwiperItem.style.backgroundSize = `100% 100%`;
+                    wrapper.appendChild(newSwiperItem);
+                });
+
+                // 初始化轮播图
+                const mySwiper = new Swiper('.swiper', {
+                    direction: 'horizontal', // 垂直切换选项
+                    loop: true, // 循环模式选项
+                    // 如果需要分页器
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    // 如果需要前进后退按钮
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                });
+
+                console.log("Rotogram rendering complete");
+
+                // 拿到歌单数据
+                const songUrl = `http://39.103.151.139:8000`
+                const response = await axios.get(`${songUrl}/music/playlist`);
+                console.log(response);
+                const { status, data: { playlists } } = response;
+                console.log(playlists);
+                console.log(status);
+                // 如果请求成功
+                if (status === 200) {
+                    // 拿到歌单容器
+                    const content = document.querySelector(".content");
+                    // 遍历歌单数据 生成歌单
+                    playlists.forEach(({ name, coverImgUrl }) => {
+                        // 创建文档元素
+                        const newItem = document.createElement("div");
+                        const newName = document.createElement("span");
+                        const newImg = document.createElement("img");
+                        // 设置类名
+                        newItem.className = "item";
+                        // 设置名字与链接
+                        newName.innerText = name;
+                        newImg.src = coverImgUrl;
+                        // 将元素添加到页面中
+                        newItem.appendChild(newImg);
+                        newItem.appendChild(newName);
+                        content.appendChild(newItem);
+                    });
+                }
+            };
+
+            // 搜索功能
+            const searchInput = document.getElementById("searchInput");
+            const searchWrapper = document.querySelector(".searchWrapper");
+            // 按下Enter键时触发
+            searchInput.onkeydown = (event) => {
+                if (event.key === "Enter") {
+                    console.log(event.target.value);
+                    // 打开新窗口显示搜索结果 把输入的值传给新窗口
+                    window.open(`./search.html?value=${event.target.value}`,'newwindow', 'width=1000, height=600, top=' + (screen.height/2+300) + ', left=' + (screen.width-400) + ', location=no');
+                }
+            }
+            // 输入框获得焦点时边框变红
+            searchInput.onfocus = () => {
+                searchWrapper.style.border = "3px solid #e60026" ;
+            }
+            searchInput.onblur = () => {
+                searchWrapper.style.border = "3px solid #242424" ;
+            }
+        </script>
+    </body>
+</html>
