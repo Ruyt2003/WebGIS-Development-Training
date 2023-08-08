@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            line-height: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="input">
+    <pre> </pre>
+    <div class="box"></div>
+
+    <script>
+        // 等待页面加载完毕
+        window.onload = () => {
+            // 1.焦点相关事件
+            const input = document.getElementById('input')
+            // onfocus 事件会在元素获得焦点时发生
+            input.onfocus = () => {
+                input.style.backgroundColor = 'pink'
+            }
+            // onblur 事件会在元素失去焦点时发生
+            input.onblur = () => {
+                input.style.backgroundColor = 'yellow'
+            }
+
+            // 2.鼠标相关事件
+            const box = document.querySelector('.box')
+            // onmouseover 事件会在鼠标指针移动到元素上时发生
+            box.onmouseover = () => {
+                box.style.backgroundColor = 'blue'
+            }
+            // onmouseleave 事件会在鼠标指针离开元素时发生
+            box.onmouseleave = () => {
+                box.style.backgroundColor = 'yellow'
+            }
+            // onmousedown 事件会在鼠标按键被按下时发生
+            box.onmousedown = () => {
+                box.innerHTML = '鼠标按下'
+                box.style.color = 'white'
+            }
+            // onmouseup 事件会在鼠标按键被松开时发生
+            box.onmouseup = () => {
+                box.innerHTML = '鼠标松开'
+                box.style.color = 'black'
+            }
+
+            // 3.键盘相关事件
+            // onkeydown 事件会在用户按下一个键盘按键时发生
+            document.onkeydown = (e) => {
+                console.log('键盘按下');
+            }
+            // onkeyup 事件会在用户释放键盘上的键时发生
+            document.onkeyup = (e) => {
+                console.log('键盘松开');
+            }
+
+            // 4.内容相关事件
+            // onchange 事件会在域的内容改变时发生
+            input.onchange = () => {
+                console.log(`内容改变为${input.value}`);
+            }
+            // oninput 事件会在用户输入时发生
+            input.oninput = () => {
+                console.log(`用户输入了${input.value}`);
+            }
+
+            // 5.窗口相关事件
+            // 节流！！！
+            // onscroll 事件会在元素滚动条在滚动时发生
+            document.onscroll = () => {
+                console.log('滚动了');
+            }
+            // onresize 事件会在窗口或框架被调整大小时发生
+            window.onresize = () => {
+                console.log('窗口大小改变了');
+            }
+
+        }
+      
+
+
+    </script>
+</body>
+</html>

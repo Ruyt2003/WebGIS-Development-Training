@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">全选</button>
+    <button id="btn2">全不选</button>
+    <input type="checkbox" id="fan">全选
+
+    <ul id="box">
+        <li><input type="checkbox">aaa</li>
+        <li><input type="checkbox">bbb</li>
+    </div>
+
+    <script>
+        let btn = document.getElementById("btn")
+        let btn2 = document.getElementById("btn2")
+
+        let inputs = document.querySelectorAll("#box input")
+
+        const changeStatus=(status)=>{
+            inputs.forEach(item=>{
+                item.checked = status;
+            })
+        }
+
+        // 全选
+        btn.onclick = function () {
+            changeStatus(true)
+        }
+        // 全不选
+        btn2.onclick = function () {
+            changeStatus(false)
+        }
+
+        let fan = document.getElementById('fan')
+        fan.onclick = function () {
+            inputs.forEach(item=>{
+                item.checked = !item.checked;
+            })
+        }
+
+    
+    </script>
+</body>
+</html>

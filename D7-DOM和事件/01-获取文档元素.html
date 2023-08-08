@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <div class="text"></div>
+    <div class="text"></div>
+    <div class="text"></div>
+
+    <script>
+        // 通过id获取文档元素
+        const app = document.getElementById('app')
+        console.log(app);
+        // 通过标签名获取一类文档元素的集合（伪数组HTMLCollection）
+        const divs = document.getElementsByTagName('div')
+        console.log(divs);
+        // 通过类名获取一类文档元素的集合（伪数组）
+        const text = document.getElementsByClassName('text')
+        console.log(text);
+
+        // 通过选择器获取文档元素 通过querySelector获取的是第一个元素
+        const app2 = document.querySelector('#app')
+        console.log(app2);
+        const divs2 = document.querySelector('div')
+        console.log(divs2);
+        const text2 = document.querySelector('.text')
+        console.log(text2);
+        // 通过选择器获取文档元素 通过querySelectorAll获取的是所有元素
+        const app3 = document.querySelectorAll('#app')
+        // 获得的是NodeList伪数组（可以用forEach遍历）
+        console.log(app3);
+    </script>
+</body>
+</html>
