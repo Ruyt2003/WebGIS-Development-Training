@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入mapbox基础资源库 -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- 地图搜索插件 -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <!-- 鹰眼图插件 -->
+    <script src="http://aesqe.github.io/mapboxgl-minimap/mapboxgl-control-minimap.js"></script>
+    <!-- 路径规划插件 -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" type="text/css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100vw;
+            height: 100vh;
+        }
+        #menu {
+            background: #fff;
+            position: fixed;
+            z-index: 100;
+            top: 10px;
+            right: 10px;
+            border-radius: 5px;
+            width: 100px;
+            border: 1px solid rgba(0,0,0,0.4);
+            padding: 5px;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .item {
+            padding: 5px;
+            line-height: 15px;
+        }
+        .mapboxgl-ctrl-top-right {
+            right: 0;
+            top: 120px;
+        }
+        #geocorder{
+            position: absolute;
+            z-index: 100;
+            width: 30%;
+            left: 50%;
+            top: 10px;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+        .mapboxgl-ctrl-geocoder--input{
+            padding-left: 30px!important;
+        }
+        #mouse-position{
+            width: 150px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            position: fixed;
+            bottom: 30px;
+            right: 10px;
+            background-color: #fff;
+            color: rgb(198, 0, 0);
+            border: 5px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+        #select{
+            width: 110px;
+            height: 25px;
+            position: fixed;
+            top: 267px;
+            right: 10px;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div id="geocorder"></div>
+
+    <div id="map">
+        <div id="mouse-position"></div>
+    </div>
+
+    <div id="menu">
+        <div class="item"> 
+            <input id="streets-v12" type="radio" name="rtoggle" value="streets" checked="checked">
+            <label for="streets-v12">streets</label>
+        </div>
+        <div class="item">
+            <input id="light-v11" type="radio" name="rtoggle" value="light">
+            <label for="light-v11">light</label>
+        </div>
+        <div class="item">
+            <input id="dark-v11" type="radio" name="rtoggle" value="dark">
+            <label for="dark-v11">dark</label>
+        </div>
+        <div class="item">
+            <input id="outdoors-v12" type="radio" name="rtoggle" value="outdoors">
+            <label for="outdoors-v12">outdoors</label>
+        </div>
+    </div>
+
+    <select name="flyTo" id="select">
+        <option value="wuhan">武汉</option>
+        <option value="beijing">北京</option>
+        <option value="zhengzhou">郑州</option>
+        <option value="yueyang">岳阳</option>
+        <option value="hongkong">香港</option>
+    </select>
+
+    <script>
+        window.onload=()=>{
+            // 注册token
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhvbmdkaXNodW1hIiwiYSI6ImNsNXJoYXR5eTI2bGgzZW53d2didWF1c3AifQ.6vOplM2NQc_xnJW3aA5ZBA'
+            // 初始化地图对象
+            const map = new mapboxgl.Map({
+                container: 'map', // 地图容器的ID
+                style: 'mapbox://styles/mapbox/streets-v12', // 地图的风格及底图数据源
+                center: [114.298572, 30.584355], // 中心点坐标 [lng, lat]
+                zoom: 9, // 当前展示的地图级别
+                projection: 'globe', // 地图投影模式
+                antialias: true // 抗锯齿
+            });
+
+
+            // 添加地图控件
+            // 添加图层切换控件
+            const layerList = document.getElementById('menu');
+            const inputs = layerList.getElementsByTagName('input');
+            // 每次点击都会触发map.setStyle() 方法，改变地图的底图风格
+            for (const input of inputs) {
+                input.onclick = (layer) => {
+                    const layerId = layer.target.id;
+                    map.setStyle('mapbox://styles/mapbox/' + layerId);
+                };
+            }
+
+            // 添加定位控件
+            map.addControl(
+                new mapboxgl.GeolocateControl({
+                positionOptions: {
+                enableHighAccuracy: true
+                },
+                // 当激活时，地图将随着设备位置的变化而接收更新
+                trackUserLocation: true,
+                // 在定位点旁边画一个箭头，指示设备的前进方向
+                showUserHeading: true
+                })
+            );
+
+            // 添加导航面板
+            const nav = new mapboxgl.NavigationControl({
+                visualizePitch: true
+            });
+            map.addControl(nav, 'top-right');
+
+            // 添加地图搜索控件
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                placeholder: '请输入地址',
+                mapboxgl: mapboxgl,
+                reverseGeocode: true
+            });
+            document.getElementById('geocorder').appendChild(geocoder.onAdd(map));
+
+            // 添加鹰眼图控件
+            map.addControl(new mapboxgl.Minimap({
+                center: [114.298572, 30.584355],
+                zoom: 2,
+                zoomLevels: [0, 22],
+                // 加载高德地图
+                style: {
+                    "version": 8,
+                    // 设置数据源
+                    "sources": {
+                        // 定义一个栅格瓦片数据源
+                        "raster-tiles": {
+                            "type": "raster",
+                            "tiles": [
+                                "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}"
+                            ],
+                            "tileSize": 256
+                        },
+                    },
+                    // 设置图层
+                    "layers": [{
+                        "id": "simple-tiles",
+                        "type": "raster",
+                        "source": "raster-tiles",
+                        "minzoom": 0,
+                        "maxzoom": 22
+                    }]
+                }, 
+            }), 'bottom-right');
+        
+            // 添加路径规划控件
+            map.addControl(
+                new MapboxDirections({
+                accessToken: mapboxgl.accessToken
+                }),
+                'top-left'
+            );
+
+            // 添加鼠标位置控件
+            map.on('mousemove', function (e) {
+                const {lng,lat} = e.lngLat;
+                document.getElementById('mouse-position').innerHTML = `
+                经度:${lng.toFixed(2)}，纬度:${lat.toFixed(2)}
+                `
+            });
+
+            // 比例尺控件
+            const scale = new mapboxgl.ScaleControl({
+                maxWidth: 80,
+                unit: 'imperial'
+            });
+            map.addControl(scale,'bottom-left');
+            scale.setUnit('metric');
+
+
+            // 飞行到指定城市并添加相关点和面图层
+            const labels = []
+            let Layers = []
+            const select = document.querySelector('#select')
+            select.onchange = function(){
+                const value = select.value;
+                let point =  [114.298572, 30.584355]
+                let dataUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/420100_full.json'
+
+                labels.length && labels.forEach(item => {
+                    item.remove()
+                })
+
+                Layers.length && Layers.forEach(item => {
+                    map.removeLayer(item)
+                    map.removeSource(item)
+                })
+                // 根据选项使用switch流程控制
+                switch(value){
+                    case 'wuhan':
+                        map.flyTo({
+                            center: [114.298572, 30.584355],
+                            zoom: 11,
+                            speed:0.5,
+                            curve:1,
+                        })
+                        point = [114.298572, 30.584355]
+                        dataUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/420100_full.json'
+                        break;
+                    case 'beijing':
+                        map.flyTo({
+                            center: [116.407526, 39.90403],
+                            zoom: 11,
+                            speed:0.5,
+                            curve:1,
+                        })
+                        point = [116.407526, 39.90403]
+                        dataUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/110000_full.json'
+                        break;
+                    case 'zhengzhou':
+                        map.flyTo({
+                            center: [113.665412, 34.757975],
+                            zoom: 11,
+                            speed:0.5,
+                            curve:1,
+                        })
+                        point = [113.665412, 34.757975]
+                        dataUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/410100_full.json'
+                        break;
+                    case 'yueyang':
+                        map.flyTo({
+                            center: [113.118958, 29.377104],
+                            zoom: 11,
+                            speed:0.5,
+                            curve:1,
+                        })
+                        point = [113.118958, 29.377104]
+                        dataUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/430600_full.json'
+                        break;
+                    case 'hongkong':
+                        map.flyTo({
+                            center: [114.193355, 22.270048],
+                            zoom: 11,
+                            speed:0.5,
+                            curve:1,
+                        })
+                        point = [114.193355, 22.270048]
+                        dataUrl = 'https://geo.datav.aliyun.com/areas_v3/bound/810000_full.json'
+                        break;
+                }
+                // 创建一个点注记
+                const marker = new mapboxgl.Marker({
+                    color: 'red',
+                    draggable: true
+                })
+                .setLngLat(point)
+                .addTo(map);
+                labels.push(marker);
+                // 创建面图层
+                fetch(dataUrl).then(data=>data.json()).then(data=>{
+                    Layers.push(value);
+                    // layer与source分开添加
+                    map.addSource(value, {
+                        'type': 'geojson',
+                        'data': data
+                    });
+                    map.addLayer({
+                        id: value,
+                        type: 'fill',
+                        source: value,
+                        paint: {
+                            'fill-color': '#a24bb9',
+                            'fill-opacity': 0.3,
+                        }
+                    });
+                })
+            }
+
+            // 添加大气层 
+            map.on('load',()=>{
+                // 添加大气层
+                map.setFog({
+                    // 大气层颜色
+                    "color": "white",
+                    // 外太空颜色
+                    "high-color": "sea-blue",
+                    // 星空背景色
+                    "space-color": "black",
+                });
+            })
+
+
+            // 添加3D建筑
+            map.on('style.load', () => {
+                // Insert the layer beneath any symbol layer.
+                const layers = map.getStyle().layers;
+                const labelLayerId = layers.find(
+                    (layer) => layer.type === 'symbol' && layer.layout['text-field']
+                ).id;
+
+                // The 'building' layer in the Mapbox Streets
+                // vector tileset contains building height data
+                // from OpenStreetMap.
+                map.addLayer(
+                {
+                    'id': 'add-3d-buildings',
+                    'source': 'composite',
+                    'source-layer': 'building',
+                    'filter': ['==', 'extrude', 'true'],
+                    'type': 'fill-extrusion',
+                    'minzoom': 15,
+                    'paint': {
+                        'fill-extrusion-color': '#aaa',
+                        
+                        // Use an 'interpolate' expression to
+                        // add a smooth transition effect to
+                        // the buildings as the user zooms in.
+                        'fill-extrusion-height': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        15,
+                        0,
+                        15.05,
+                        ['get', 'height']
+                        ],
+                        'fill-extrusion-base': [
+                        'interpolate',
+                        ['linear'],
+                        ['zoom'],
+                        15,
+                        0,
+                        15.05,
+                        ['get', 'min_height']
+                        ],
+                        'fill-extrusion-opacity': 0.6
+                    }
+                },
+                labelLayerId
+                );
+            });
+        }
+    </script>
+</body>
+</html>
