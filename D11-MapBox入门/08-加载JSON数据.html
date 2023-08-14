@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        window.onload=()=>{
+            // 1.注册token
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhvbmdkaXNodW1hIiwiYSI6ImNsNXJoYXR5eTI2bGgzZW53d2didWF1c3AifQ.6vOplM2NQc_xnJW3aA5ZBA'
+            // 2.初始化地图对象
+            const map = new mapboxgl.Map({
+                container: 'map', // 地图容器的ID
+                style: 'mapbox://styles/mapbox/streets-v12', // 地图的风格及底图数据源
+                center: [116.397128, 39.916527], // 中心点坐标 [lng, lat]
+                zoom: 9, // 当前展示的地图级别
+                projection: 'globe' // 地图投影模式
+            });
+
+            // fetch('https://geo.datav.aliyun.com/areas_v3/bound/110000_full.json').then(data=>data.json()).then(data=>{
+            //     // layer与source分开添加
+            //     map.addSource('beijing', {
+            //         'type': 'geojson',
+            //         'data': data
+            //     });
+            //     map.addLayer({
+            //         id: 'beijing',
+            //         type: 'fill',
+            //         source: 'beijing',
+            //         paint: {
+            //             'fill-color': '#a24bb9',
+            //             'fill-opacity': 0.5,
+            //         }
+            //     });
+            // })
+            
+            map.on('style.load', () => {
+                map.addSource('beijing', {
+                    type: 'geojson',
+                    data: 'https://geo.datav.aliyun.com/areas_v3/bound/110000_full.json'
+                })
+                map.addLayer({
+                    id: 'beijing',
+                    type: 'fill',
+                    source: 'beijing',
+                    paint: {
+                        'fill-color': '#a24bb9',
+                        'fill-opacity': 0.3,
+                    }
+                })
+                map.addLayer({
+                    id: 'beijing-outline',
+                    type: 'line',
+                    source: 'beijing',
+                    paint: {
+                        'line-color': '#a24bb9',
+                        'line-width': 2,
+                        'line-opacity': 0.8,
+                    }
+                });
+            })
+        }
+    </script>
+</body>
+</html>

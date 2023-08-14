@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <span id="status"></span>
+
+    <div id="map"></div>
+
+    <script>
+        window.onload=()=>{
+            // 1.注册token
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhvbmdkaXNodW1hIiwiYSI6ImNsNXJoYXR5eTI2bGgzZW53d2didWF1c3AifQ.6vOplM2NQc_xnJW3aA5ZBA'
+            // 2.初始化地图对象
+            const map = new mapboxgl.Map({
+                container: 'map', // 地图容器的ID
+                style: 'mapbox://styles/mapbox/streets-v12', // 地图的风格及底图数据源
+                center: [116.397128, 39.916527], // 中心点坐标 [lng, lat]
+                zoom: 1, // 当前展示的地图级别
+                projection: 'globe' // 地图投影模式
+            });
+
+            // 3.地球自转
+            // 原理：控制地图的中心点一直变化
+            let isRotate = true;
+            const rotate = () => {
+                let zoom = map.getZoom();
+
+                if(isRotate && zoom < 5){
+                    // 获取当前地图的中心点
+                    let center = map.getCenter();
+                    center.lng += 10;
+                    // easeTo()方法：平滑过渡到新的中心点
+                    map.easeTo({
+                        center: center,
+                        duration: 1000,
+                        easing: (t) => {
+                            return t;
+                        }
+                    })
+                }
+            }
+            // setInterval(rotate, 1000);
+            map.on('moveend', () => {
+                rotate()
+            })
+            
+            // 点击暂停自传
+            map.on('click', () => {
+                isRotate = !isRotate;
+                const status = document.getElementById('status');
+                status.textContent = isRotate ? '地球正在自转' : '地球已暂停自转';
+                if(!isRotate){
+                    map.stop();
+                }else{
+                    rotate();
+                }
+            })
+            rotate();
+        }
+    </script>
+</body>
+</html>

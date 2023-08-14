@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #marker{
+            width: 50px;
+            height: 50px;
+            background: url('https://img.gejiba.com/images/db6e7706e2c3dcae834e44b0e888c767.jpg');
+            background-size: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="removeAll">删除所有标注</button>
+    <div id="map"></div>
+
+    <script>
+        window.onload=()=>{
+            // 1.注册token
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhvbmdkaXNodW1hIiwiYSI6ImNsNXJoYXR5eTI2bGgzZW53d2didWF1c3AifQ.6vOplM2NQc_xnJW3aA5ZBA'
+            // 2.初始化地图对象
+            const map = new mapboxgl.Map({
+                container: 'map', // 地图容器的ID
+                style: 'mapbox://styles/mapbox/streets-v12', // 地图的风格及底图数据源
+                center: [114.30,30.50], // 中心点坐标 [lng, lat]
+                zoom: 9, // 当前展示的地图级别
+                projection: 'globe' // 地图投影模式
+            });
+            
+            
+
+
+            // 3.点击添加标记
+            const markers = [];
+            map.on('click', (e)=>{
+                const div = document.createElement('div');
+                div.id = 'marker';
+                const marker = new mapboxgl.Marker({
+                    color: 'red',
+                    element: div,
+                    draggable: true, // 是否可拖拽
+                    occludedOpacity: 0.5, // 遮挡时的透明度
+                    
+                }).setLngLat(e.lngLat)
+                .addTo(map);
+                markers.push(marker).addTo(map);
+            })
+
+            const removeAll = document.querySelector('#removeAll');
+            removeAll.onclick = ()=>{
+                markers.length && markers.forEach((marker)=>{
+                    marker.remove();
+                })
+                markers.length = 0;
+            }
+        }
+    </script>
+</body>
+</html>

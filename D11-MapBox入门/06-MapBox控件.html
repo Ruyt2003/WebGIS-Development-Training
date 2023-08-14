@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- 导航插件 -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.css" type="text/css">
+    <!-- 鹰眼图插件 -->
+    <script src="http://aesqe.github.io/mapboxgl-minimap/mapboxgl-control-minimap.js"></script>
+    <!-- 地图搜索插件 -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100vw;
+            height: 100vh;
+        }
+        #mouse-position{
+            width: 150px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            position: fixed;
+            bottom: 30px;
+            right: 10px;
+            background-color: #fff;
+            color: red;
+            border: 5px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+        #geocorder{
+            position: absolute;
+            z-index: 100;
+            width: 30%;
+            left: 50%;
+            top: 10px;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+        .mapboxgl-ctrl-geocoder--input{
+            padding-left: 30px!important;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="geocorder"></div>
+
+    <div id="map">
+        <div id="mouse-position"></div>
+    </div>
+
+    <script>
+        window.onload=()=>{
+            // 1.注册token
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhvbmdkaXNodW1hIiwiYSI6ImNsNXJoYXR5eTI2bGgzZW53d2didWF1c3AifQ.6vOplM2NQc_xnJW3aA5ZBA'
+            // 2.初始化地图对象
+            const map = new mapboxgl.Map({
+                container: 'map', // 地图容器的ID
+                style: 'mapbox://styles/mapbox/streets-v12', // 地图的风格及底图数据源
+                center: [116.397128, 39.916527], // 中心点坐标 [lng, lat]
+                zoom: 9, // 当前展示的地图级别
+                projection: 'globe' // 地图投影模式
+            });
+
+            // 鹰眼图控件
+            map.addControl(new mapboxgl.Minimap({
+                center: [116.397128, 39.916527],
+                zoom: 4,
+                zoomLevels: []
+            }), 'bottom-right');
+
+
+            // 定位控件
+            map.addControl(
+                new mapboxgl.GeolocateControl({
+                positionOptions: {
+                enableHighAccuracy: true
+                },
+                // 当激活时，地图将随着设备位置的变化而接收更新
+                trackUserLocation: true,
+                // 在定位点旁边画一个箭头，指示设备的前进方向
+                showUserHeading: true
+                })
+            );
+
+            // 全屏控件
+            map.addControl(new mapboxgl.FullscreenControl());
+
+            // 导航控件
+            const nav = new mapboxgl.NavigationControl({
+                visualizePitch: true
+            });
+            map.addControl(nav, 'bottom-left');
+
+            // 路径规划控件
+            map.addControl(
+                new MapboxDirections({
+                accessToken: mapboxgl.accessToken
+                }),
+                'top-left'
+            );
+
+            // 比例尺控件
+            const scale = new mapboxgl.ScaleControl({
+                maxWidth: 80,
+                unit: 'imperial'
+            });
+            map.addControl(scale,'bottom-left');
+            scale.setUnit('metric');
+
+
+            // 鼠标位置控件
+            map.on('mousemove', function (e) {
+                const {lng,lat} = e.lngLat;
+                document.getElementById('mouse-position').innerHTML = `
+                经度:${lng.toFixed(2)},纬度:${lat.toFixed(2)}
+                `
+            });
+
+            // 地图搜索控件 单独放入一个div中
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                placeholder: '请输入地址',
+                mapboxgl: mapboxgl,
+                reverseGeocode: true
+            });
+            document.getElementById('geocorder').appendChild(geocoder.onAdd(map));
+        }
+    </script>
+</body>
+</html>

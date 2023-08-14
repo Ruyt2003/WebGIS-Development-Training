@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+        window.onload=()=>{
+            // 1.注册token
+            mapboxgl.accessToken = 'pk.eyJ1IjoiemhvbmdkaXNodW1hIiwiYSI6ImNsNXJoYXR5eTI2bGgzZW53d2didWF1c3AifQ.6vOplM2NQc_xnJW3aA5ZBA'
+
+            // 2.初始化地图对象
+            const map = new mapboxgl.Map({
+                container: 'map', // 地图容器的ID
+                // 地图的风格及底图数据源
+                style: {
+                    "version": 8,
+                    // 设置数据源
+                    "sources": {
+                        // 定义一个栅格瓦片数据源
+                        "raster-tiles": {
+                            "type": "raster",
+                            "tiles": [
+                                "http://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}"
+                            ],
+                            "tileSize": 256
+                        },
+                    },
+                    // 设置图层
+                    "layers": [{
+                        "id": "simple-tiles",
+                        "type": "raster",
+                        "source": "raster-tiles",
+                        "minzoom": 0,
+                        "maxzoom": 22
+                    }]
+                }, 
+                center: [116.397128, 39.916527], // 中心点坐标 [lng, lat]
+                zoom: 9, // 当前展示的地图级别
+                projection: 'globe', // 地图投影模式（很重要）
+                // 定义水平角
+                bearing:45,
+                // 定义俯仰角
+                pitch:45,
+            });
+
+            // 3.添加大气层——地图加载完毕之后，会有一个回调事件，我们就在回调事件中添加大气层
+            map.on('load',()=>{
+                // 添加大气层
+                map.setFog({
+                    // 大气层颜色
+                    "color": "white",
+                    // 外太空颜色
+                    "high-color": "sky-blue",
+                    // 星空背景色
+                    "space-color": "black",
+                });
+                map.flyTo({
+                    center: [16.397128, 39.916527],
+                    zoom: 9,
+                    bearing:45,
+                    pitch:45,
+                    speed:0.5,
+                    curve:1,
+                })
+            })
+        }
+    </script>
+</body>
+</html>
