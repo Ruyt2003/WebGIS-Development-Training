@@ -1,2 +1,2 @@
 # WebGIS-Development-Training
-新手入门WebGIS开发
+web+vue+mapbox 开发培训
